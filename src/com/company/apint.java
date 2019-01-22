@@ -210,18 +210,18 @@ class apint {
     }
 
 
-    apint multiply(apint that){
+    apint multiply(apint that) {
 
         apint firstnum = this;
         apint secondnum = that;
         char sign;
-        if (firstnum.apNum.size() < secondnum.apNum.size()){
+        if (firstnum.apNum.size() < secondnum.apNum.size()) {
             apint ph = firstnum;
             firstnum = secondnum;
             secondnum = ph;
         }
 
-        if (firstnum.sign == secondnum.sign){
+        if (firstnum.sign == secondnum.sign) {
             sign = '+';
         } else {
             sign = '-';
@@ -230,24 +230,24 @@ class apint {
 
         ArrayList<ArrayList> placeHolderList = new ArrayList<>();
         int place = 0;
-        for (int i = secondnum.apNum.size()-1; i >= 0; i--){
+        for (int i = secondnum.apNum.size() - 1; i >= 0; i--) {
             ArrayList<Integer> currentPlaceInReverse = new ArrayList<>();
             int carryout = 0;
-            for (int p = 0; p < place; p++){
+            for (int p = 0; p < place; p++) {
                 currentPlaceInReverse.add(0);
             }
-            for (int j = firstnum.apNum.size()-1; j >= 0; j--){
-                int product = (firstnum.apNum.get(j)*secondnum.apNum.get(i)) + carryout;
-                int currentPoint = product%10;
-                carryout = product/10;
+            for (int j = firstnum.apNum.size() - 1; j >= 0; j--) {
+                int product = (firstnum.apNum.get(j) * secondnum.apNum.get(i)) + carryout;
+                int currentPoint = product % 10;
+                carryout = product / 10;
                 currentPlaceInReverse.add(currentPoint);
             }
-            if (carryout > 0){
+            if (carryout > 0) {
                 currentPlaceInReverse.add(carryout);
             }
             ArrayList<Integer> currentPlace = new ArrayList<>();
 
-            for (int l = currentPlaceInReverse.size()-1; l >= 0; l-- ){
+            for (int l = currentPlaceInReverse.size() - 1; l >= 0; l--) {
                 currentPlace.add(currentPlaceInReverse.get(l));
 
             }
@@ -256,25 +256,25 @@ class apint {
         }
         ArrayList<ArrayList> separatedList = new ArrayList<>();
 
-        for (int i = placeHolderList.size()-1; i >= 0; i--){
-         separatedList.add(placeHolderList.get(i));
+        for (int i = placeHolderList.size() - 1; i >= 0; i--) {
+            separatedList.add(placeHolderList.get(i));
         }
 
         ArrayList<String> stringList = new ArrayList<>();
 
-        for (int i = 0; i < separatedList.size(); i++ ){
+        for (int i = 0; i < separatedList.size(); i++) {
             String num = "";
-            for (int j = 0; j < separatedList.get(i).size(); j++){
+            for (int j = 0; j < separatedList.get(i).size(); j++) {
                 num += separatedList.get(i).get(j);
             }
             stringList.add(num);
         }
-        apint summedProduct = new apint('+',"0");
+        apint summedProduct = new apint('+', "0");
 
-        for (int i = 0; i < stringList.size(); i++){
+        for (int i = 0; i < stringList.size(); i++) {
             String s = stringList.get(i);
-            apint temp = new apint('+',s);
-           summedProduct = summedProduct.add(temp);
+            apint temp = new apint('+', s);
+            summedProduct = summedProduct.add(temp);
         }
 
         summedProduct.sign = sign;
