@@ -37,8 +37,11 @@ public class Main {
         apint acd = new apint('-',"123");
         apint basc = new apint('+', "456");
 
-
-
+        aprat fr = new aprat(123,12);
+        aprat rf = new aprat(140,12);
+        aprat frr = fr.add(rf);
+        frr.print(frr);
+        System.out.println();
 
 
         b.print(b);
