@@ -82,6 +82,27 @@ public class aprat {
 
     }
 
+    aprat divide(aprat that){
+
+        aprat reciprocal = new aprat();
+        reciprocal.numerator = that.denominator;
+        reciprocal.denominator = that.numerator;
+        reciprocal.sign = that.sign;
+
+        apint numProduct = this.numerator.multiply(reciprocal.numerator);
+        apint denProduct = this.denominator.multiply(reciprocal.denominator);
+
+        aprat returnVal = new aprat();
+        returnVal.numerator = numProduct;
+        returnVal.denominator = denProduct;
+        if (returnVal.denominator.sign == returnVal.numerator.sign){
+                returnVal.sign = '+';
+            } else {
+            returnVal.sign = '-';
+        }
+        return returnVal;
+    }
+
 
    void print(aprat rat){
        rat.numerator.print(rat.numerator);
