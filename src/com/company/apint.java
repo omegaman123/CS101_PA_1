@@ -57,10 +57,37 @@ class apint {
     }
 
     void print() {
+        if (this.num.charAt(0) == '0') {
+            String newNum = "";
+            for (int i = 0; i < this.num.length(); i++) {
+                if (this.num.charAt(i) == '0') {
+                    continue;
+                } else {
+                    newNum += this.num.charAt(i);
+                }
+            }
+            this.num = newNum;
+        }
+
         if (this.sign == '-') {
             System.out.println('-' + this.num);
         } else {
             System.out.println(this.num);
+        }
+    }
+
+
+    void trimZero(){
+        if (this.num.charAt(0) == '0') {
+            String newNum = "";
+            for (int i = 0; i < this.num.length(); i++) {
+                if (this.num.charAt(i) == '0') {
+                    continue;
+                } else {
+                    newNum += this.num.charAt(i);
+                }
+            }
+            this.num = newNum;
         }
     }
 
@@ -129,6 +156,7 @@ class apint {
         returnVal.apNum = answer;
         returnVal.num = s;
         returnVal.sign = sign;
+        returnVal.trimZero();
         return returnVal;
 
     }
@@ -137,7 +165,7 @@ class apint {
     apint subtract(apint that) {
         apint firstNum = this;
         apint secondNum = that;
-
+        char sgn = '+';
         if (this.apNum.size() < that.apNum.size()) {
             sign = '-';
             firstNum = that;
@@ -170,12 +198,8 @@ class apint {
                     apint ph = firstNum;
                     firstNum = secondNum;
                     secondNum = ph;
-
-                    if (sign == '+') {
-                        sign = '-';
-                    } else {
-                        sign = '+';
-                    }
+                    sgn = '-';
+                    break;
                 }
             }
         }
@@ -193,9 +217,12 @@ class apint {
             }
             int place = firstNum.apNum.get(i);
             int val = place - subval - carryout;
+
             if (place < subval) {
                 carryout = 1;
                 val = (place + 10) - subval;
+            } else {
+                carryout = 0;
             }
             placeHolderList.add(val);
             counter++;
@@ -210,9 +237,11 @@ class apint {
             idx++;
         }
         apint returnVal = new apint();
-        returnVal.sign = sign;
+
+        returnVal.sign = sgn;
         returnVal.apNum = answer;
         returnVal.num = s;
+        returnVal.trimZero();
 
         return returnVal;
     }
@@ -284,20 +313,18 @@ class apint {
             apint temp = new apint('+', s);
             summedProduct = summedProduct.add(temp);
         }
-
+        summedProduct.trimZero();
         summedProduct.sign = sign;
         return summedProduct;
 
     }
 
-    apint divide(apint that){
-
-
-
+    apint divide(apint that) {
 
 
         return new apint();
     }
+
     public String toString() {
         if (this.sign == '-') {
             return '-' + this.num;

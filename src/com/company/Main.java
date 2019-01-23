@@ -98,8 +98,15 @@ public class Main {
         System.out.println();
 
 
-        aprat res1 = new aprat();
+        aprat res1;
         res1 = fr.add(rf);
+        System.out.printf("(%s / %s) + (%s / %s) = %s/%s\n", fr.numerator, fr.denominator,rf.numerator,rf.denominator, res1.numerator,res1.denominator);
+        res1 = fr.multiply(rf);
+        System.out.printf("(%s / %s) * (%s / %s) = %s/%s\n", fr.numerator, fr.denominator,rf.numerator,rf.denominator, res1.numerator,res1.denominator);
+        res1 = fr.divide(rf);
+        System.out.printf("(%s / %s) / (%s / %s) = %s/%s\n", fr.numerator, fr.denominator,rf.numerator,rf.denominator, res1.numerator,res1.denominator);
+        res1 = fr.subtract(rf);
+        System.out.printf("(%s / %s) - (%s / %s) = %s/%s\n", fr.numerator, fr.denominator,rf.numerator,rf.denominator, res1.numerator,res1.denominator);
 
         System.out.println();
 
@@ -118,5 +125,8 @@ public class Main {
         res = c.multiply(d);
         System.out.printf("%s * %s = %s\n", c, d, res);
         System.out.println();
+
+
+
     }
 }
