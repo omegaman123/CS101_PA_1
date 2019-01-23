@@ -33,7 +33,6 @@ public class aprat {
 
     aprat add(aprat that) {
 
-        char sign = '+';
         if (this.denominator.num.compareTo(that.denominator.num)==0){
             apint newNumerator = this.numerator.add(that.numerator);
             aprat returnVal = new aprat();
@@ -104,13 +103,30 @@ public class aprat {
     }
 
 
-   void print(aprat rat){
-       rat.numerator.print(rat.numerator);
-       for (int i = 0; i < rat.numerator.apNum.size(); i ++){
+    aprat multiply(aprat that){
+        apint newNumerator = this.numerator.multiply(that.numerator);
+        apint newDenominator = this.denominator.multiply(that.denominator);
+
+        aprat returnVal = new aprat();
+        returnVal.numerator = newNumerator;
+        returnVal.denominator = newDenominator;
+
+        if (returnVal.denominator.sign == returnVal.numerator.sign){
+            returnVal.sign = '+';
+        } else{
+            returnVal.sign = '-';
+        }
+        return returnVal;
+    }
+
+
+   void print(){
+       this.numerator.print();
+       for (int i = 0; i < this.numerator.apNum.size(); i ++){
            System.out.print("-");
        }
        System.out.println();
-       rat.denominator.print(rat.denominator);
+       this.denominator.print();
     }
 
     aprat simplify(aprat rat){

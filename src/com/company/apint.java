@@ -56,11 +56,11 @@ class apint {
         }
     }
 
-    void print(apint num) {
-        if (num.sign == '-') {
-            System.out.println('-' + num.num);
+    void print() {
+        if (this.sign == '-') {
+            System.out.println('-' + this.num);
         } else {
-            System.out.println(num.num);
+            System.out.println(this.num);
         }
     }
 
@@ -70,9 +70,17 @@ class apint {
         apint secondNum = that;
         char sign = '+';
         if ((this.sign == '+' && that.sign == '-') || (this.sign == '-' && that.sign == '+')) {
-            this.sign = '+';
-            that.sign = '+';
-            return this.subtract(that);
+            firstNum = new apint();
+            firstNum.apNum = this.apNum;
+            firstNum.num = this.num;
+
+            secondNum = new apint();
+            secondNum.apNum = that.apNum;
+            secondNum.num = that.num;
+
+            firstNum.sign = '+';
+            secondNum.sign = '+';
+            return firstNum.subtract(secondNum);
         }
 
         if (this.sign == '-' && that.sign == '-') {
@@ -280,5 +288,21 @@ class apint {
         summedProduct.sign = sign;
         return summedProduct;
 
+    }
+
+    apint divide(apint that){
+
+
+
+
+
+        return new apint();
+    }
+    public String toString() {
+        if (this.sign == '-') {
+            return '-' + this.num;
+        } else {
+            return this.num;
+        }
     }
 }

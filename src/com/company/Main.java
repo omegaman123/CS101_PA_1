@@ -37,70 +37,86 @@ public class Main {
         apint acd = new apint('-',"123");
         apint basc = new apint('+', "456");
 
+        apint m1 = new apint('-',"111");
+        apint m2 = new apint('-',"222");
+
         aprat fr = new aprat(123,12);
         aprat rf = new aprat(140,12);
-        aprat frr = fr.add(rf);
-        frr.print(frr);
-        System.out.println();
 
 
-        b.print(b);
-        c.print(c);
-        d.print(d);
-        e.print(e);
-        f.print(f);
 
 
-        System.out.println();
+        b.print();
+        c.print();
+        d.print();
+        e.print();
+        f.print();
 
-        apint g = a.add(b);
-        g.print(g);
 
         System.out.println();
 
-        apint gg = aa.add(bb);
-        gg.print(gg);
+        apint res = a.add(b);
+        System.out.printf("%s + %s = %s\n", a, b, res);
+        System.out.println();
+
+        res = aa.add(bb);
+        System.out.printf("%s + %s = %s\n", aa, bb, res);
 
         System.out.println();
 
-        apint af = c.add(d);
-        af.print(af);
-
+         res = c.add(d);
+        System.out.printf("%s + %s = %s\n", c, d, res);
         System.out.println();
 
 
-        apint abc = ab.add(ba);
-        abc.print(abc);
+        res = ab.add(ba);
+        System.out.printf("%s + %s = %s\n", ab, ba, res);
         System.out.println();
 
-        apint acc = ca.subtract(ac);
-        acc.print(acc);
+         res = ca.subtract(ac);
+        System.out.printf("%s - %s = %s\n", ca, ac, res);
         System.out.println();
 
-        apint acca = cac.subtract(aca);
-        acca.print(acca);
+         res = cac.subtract(aca);
+        System.out.printf("%s - %s = %s\n", cac, aca, res);
         System.out.println();
 
-        apint bacc = cac.add(aca);
-        bacc.print(bacc);
+         res = cac.add(aca);
+        System.out.printf("%s + %s = %s\n", cac, aca, res);
         System.out.println();
 
-        apint bac = cc.add(aba);
-        bacc.print(bac);
+         res = cc.add(aba);
+        System.out.printf("%s + %s = %s\n", cc, aba, res);
         System.out.println();
 
-        apint bcc = cca.add(bba);
-        bacc.print(bcc);
+         res = cca.add(bba);
+        System.out.printf("%s + %s = %s\n", cca, bba, res.num);
         System.out.println();
 
-        apint bccs = cd.add(bbc);
-        bacc.print(bccs);
-        System.out.println();
-
-        apint bsccs = acd.multiply(basc);
-        bacc.print(bsccs);
+         res = cd.add(bbc);
+        System.out.printf("%s + %s = %s\n", cd, bbc, res);
         System.out.println();
 
 
+        aprat res1 = new aprat();
+        res1 = fr.add(rf);
+
+        System.out.println();
+
+        res = acd.multiply(basc);
+        System.out.printf("%s * %s = %s\n", acd, basc, res);
+        System.out.println();
+
+        res = a.multiply(b);
+        System.out.printf("%s * %s = %s\n", a, b, res);
+        System.out.println();
+
+        res = m1.multiply(m2);
+        System.out.printf("%s * %s = %s\n", m1, m2, res);
+        System.out.println();
+
+        res = c.multiply(d);
+        System.out.printf("%s * %s = %s\n", c, d, res);
+        System.out.println();
     }
 }
