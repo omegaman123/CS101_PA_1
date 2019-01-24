@@ -77,7 +77,7 @@ class apint {
     }
 
 
-    void trimZero(){
+    void trimZero() {
         if (this.num.charAt(0) == '0') {
             String newNum = "";
             for (int i = 0; i < this.num.length(); i++) {
@@ -166,10 +166,13 @@ class apint {
         apint firstNum = this;
         apint secondNum = that;
         char sgn = '+';
-        if (this.apNum.size() < that.apNum.size()) {
-            sign = '-';
+        if (firstNum.compareTo(secondNum)== -1) {
+            sgn = '-';
             firstNum = that;
             secondNum = this;
+        }
+        if (firstNum.compareTo(secondNum)==0){
+            return new apint(0);
         }
 
         if (firstNum.sign == '-' && secondNum.sign == '+') {
@@ -190,19 +193,6 @@ class apint {
             return returnVal;
         }
 
-        if (firstNum.sign == secondNum.sign
-                && firstNum.apNum.size() == secondNum.apNum.size()
-                && firstNum.apNum.get(0) == secondNum.apNum.get(0)) {
-            for (int i = 1; i < firstNum.apNum.size(); i++) {
-                if (secondNum.apNum.get(i) > firstNum.apNum.get(i)) {
-                    apint ph = firstNum;
-                    firstNum = secondNum;
-                    secondNum = ph;
-                    sgn = '-';
-                    break;
-                }
-            }
-        }
 
         ArrayList<Integer> placeHolderList = new ArrayList<>();
 
@@ -236,14 +226,11 @@ class apint {
             s = s + answer.get(idx);
             idx++;
         }
-        apint returnVal = new apint();
 
-        returnVal.sign = sgn;
-        returnVal.apNum = answer;
-        returnVal.num = s;
+        apint returnVal = new apint(sgn,s);
         returnVal.trimZero();
 
-        return returnVal;
+        return new apint(returnVal.sign, returnVal.num);
     }
 
 
@@ -319,10 +306,66 @@ class apint {
 
     }
 
-    apint divide(apint that) {
+    apint divide(apint that) throws IllegalArgumentException {
+        apint numerator = this;
+        apint divisor = that;
+        char sign;
+        if (numerator.sign == divisor.sign){
+            sign = '+';
+
+        } else {
+            sign = '-';
+
+        }
+
+        if (divisor.apNum.size() == 0) {
+            throw new IllegalArgumentException("Divisor is zero");
+        }
+        ArrayList<Integer> placeholderList = new ArrayList<>();
+        apint res = new apint();
+        apint tmp1 = new apint();
+        tmp1.apNum = new ArrayList<>();
+        apint tmp2 = new apint();
+        apint zero = new apint(0);
+        String s = "";
+
+        for (int i = 0; i < numerator.apNum.size(); i++) {
+            int digit = numerator.apNum.get(i);
+            tmp1.apNum.add(digit);
+            tmp1.num += digit;
+            if (tmp1.compareTo(divisor)>=0){
+                int counter = 0;
+                while (true){
+                    tmp2 = new apint(tmp1.sign,tmp1.num);
+                    tmp1 = tmp1.subtract(divisor);
+                    if (tmp1.compareTo(zero) == -1){
+                        break;
+                    }
+                    counter++;
+                }
+
+                if (tmp2.compareTo(zero) == 0){
+                    placeholderList.add(counter);
+                    s += counter;
+                    for (int j = i+1; j < numerator.apNum.size(); j ++){
+                        placeholderList.add(0);
+                        s += 0;
+                    }
+                    break;
+                }
+                tmp1 = new apint(tmp2.sign,tmp2.num);
+                placeholderList.add(counter);
+                s += counter;
+            }
+        }
 
 
-        return new apint();
+
+        res.apNum = placeholderList;
+        res.num = s;
+        res.sign = sign;
+        return res;
+
     }
 
     public String toString() {
@@ -330,6 +373,48 @@ class apint {
             return '-' + this.num;
         } else {
             return this.num;
+        }
+    }
+
+    int compareTo(apint that) {
+        if (this.sign == '-' && that.sign == '+') {
+            return -1;
+        } else if (this.sign == '+' && that.sign == '-') {
+            return 1;
+        } else if (this.sign == '-' && that.sign == '-') {
+            if (this.apNum.size() > that.apNum.size()) {
+                return -1;
+            } else if (this.apNum.size() < that.apNum.size()) {
+                return 1;
+
+            } else {
+
+                for (int i = 0; i < this.apNum.size(); i++) {
+                    if (this.apNum.get(i) > that.apNum.get(i)) {
+                        return -1;
+                    } else if (this.apNum.get(i) < that.apNum.get(i)) {
+                        return 1;
+                    }
+                }
+                return 0;
+            }
+        } else {
+            if (this.apNum.size() > that.apNum.size()) {
+                return 1;
+            } else if (this.apNum.size() < that.apNum.size()) {
+                return -1;
+
+            } else {
+
+                for (int i = 0; i < this.apNum.size(); i++) {
+                    if (this.apNum.get(i) > that.apNum.get(i)) {
+                        return 1;
+                    } else if (this.apNum.get(i) < that.apNum.get(i)) {
+                        return -1;
+                    }
+                }
+                return 0;
+            }
         }
     }
 }

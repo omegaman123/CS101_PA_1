@@ -1,5 +1,7 @@
 package com.company;
 
+import java.math.BigInteger;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -40,10 +42,25 @@ public class Main {
         apint m1 = new apint('-',"111");
         apint m2 = new apint('-',"222");
 
+        apint zro = new apint(0);
+
         aprat fr = new aprat(123,12);
         aprat rf = new aprat(140,12);
 
 
+        System.out.printf("%s compared to %s = %s",a.num,b.num,a.compareTo(b));
+        System.out.println();
+        System.out.printf("%s compared to %s = %s",b.num,a.num,b.compareTo(a));
+        System.out.println();
+        System.out.printf("%s compared to %s = %s",cca.num,cd.num,cca.compareTo(cd));
+        System.out.println();
+        System.out.printf("%s compared to %s = %s",cd.num,zro.num,cd.compareTo(zro));
+        System.out.println();
+        System.out.printf("%s compared to %s = %s",aba.num,zro.num,aba.compareTo(zro));
+        System.out.println();
+        System.out.printf("%s compared to %s = %s",zro.num,zro.num,zro.compareTo(zro));
+        System.out.println();
+        System.out.println();
 
 
         b.print();
@@ -51,7 +68,6 @@ public class Main {
         d.print();
         e.print();
         f.print();
-
 
         System.out.println();
 
@@ -125,6 +141,40 @@ public class Main {
         res = c.multiply(d);
         System.out.printf("%s * %s = %s\n", c, d, res);
         System.out.println();
+
+        apint f1 = new apint(15);
+        apint f2 = new apint(51);
+        res = f1.subtract(f2);
+        System.out.printf("%s - %s = %s\n", f1, f2, res);
+        System.out.println();
+
+        apint t1 = new apint(117);
+        res = t1.subtract(f2);
+        System.out.printf("%s - %s = %s\n", t1, f2, res);
+        System.out.println();
+
+
+        apint d1 = new apint(51);
+        apint d2 = new apint(6789);
+        res = d2.divide(d1);
+        System.out.printf("%s / %s = %s\n", d2, d1, res);
+        System.out.println();
+
+        apint d3 = new apint(100);
+        apint d4 = new apint(5);
+        res = d3.divide(d4);
+        System.out.printf("%s / %s = %s\n", d3, d4, res);
+        System.out.println();
+
+        apint d5 = new apint(1000);
+        apint d6 = new apint(25);
+        res = d5.divide(d6);
+        System.out.printf("%s / %s = %s\n", d5, d6, res);
+        System.out.println();
+
+
+
+
 
 
 
