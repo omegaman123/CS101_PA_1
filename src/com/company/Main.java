@@ -173,6 +173,11 @@ public class Main {
         System.out.println();
 
 
+        apint ss1 = new apint(100);
+        apint ss2 = new apint(25);
+        res = ss1.subtract(ss2);
+
+
 
 
 
