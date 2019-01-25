@@ -4,20 +4,26 @@ package com.company;
 import java.util.ArrayList;
 
 class apint {
+    static final apint Zero = new apint(0);
     char sign;
     String num;
     ArrayList<Integer> apNum;
+    apint remainder;
 
 
     apint() {
         this.sign = '+';
         this.num = "";
+        this.remainder = null;
+
+
     }
 
     apint(char sign, String digits) {
         this.sign = sign;
         this.num = digits;
         this.apNum = new ArrayList<>();
+        this.remainder = null;
         for (int i = 0; i < digits.length(); i++) {
             char c = digits.charAt(i);
             int a = Character.getNumericValue(c);
@@ -43,6 +49,8 @@ class apint {
             int a = Character.getNumericValue(b);
             this.apNum.add(a);
         }
+        this.remainder = null;
+
     }
 
     apint(double number) {
@@ -54,6 +62,8 @@ class apint {
             int a = Character.getNumericValue(c);
             this.apNum.add(a);
         }
+        this.remainder = null;
+
     }
 
     void print() {
@@ -161,6 +171,8 @@ class apint {
         return returnVal;
 
     }
+
+
 
     apint subtract(apint that) {
         apint firstNum = this;
@@ -319,6 +331,18 @@ class apint {
 
         }
 
+        if (divisor.compareTo(new apint(1)) == 0){
+            apint returnVal = new apint(numerator.sign,numerator.num);
+            returnVal.remainder = new apint(0);
+            return returnVal;
+        }
+
+        if (numerator.compareTo(divisor) == -1){
+            apint returnVal = new apint(0);
+            returnVal.remainder = numerator;
+            return returnVal;
+        }
+
         if (divisor.apNum.size() == 0) {
             throw new IllegalArgumentException("Divisor is zero");
         }
@@ -360,12 +384,27 @@ class apint {
             }
         }
 
-
+        res.remainder = tmp2;
         res.apNum = placeholderList;
         res.num = s;
         res.sign = sign;
         return res;
+    }
 
+
+    static apint GreatestCommonDivisor(apint a, apint b){
+        if (b.compareTo(Zero) == 0 ){
+            return a;
+        }
+        return GreatestCommonDivisor(b, a.divide(b).remainder);
+
+    }
+
+    static apint LeastCommonMultiple(apint a, apint b){
+        apint ab = a.multiply(b);
+        apint abGCD = GreatestCommonDivisor(a,b);
+
+        return ab.divide(abGCD);
     }
 
     public String toString() {
