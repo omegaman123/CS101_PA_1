@@ -215,7 +215,12 @@ public class Main {
         ss2 = new apint(-99);
         res = ss1.subtract(ss2);
         System.out.printf("%s - %s = %s\n", ss1, ss2, res);
+        System.out.println();
 
+        apint ssf = new apint(-1000);
+        res = ssf.subtract(ss1);
+        System.out.printf("%s - %s = %s\n", ssf, ss1, res);
+        System.out.println();
 
 
     }

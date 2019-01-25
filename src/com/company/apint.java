@@ -162,7 +162,6 @@ class apint {
 
     }
 
-
     apint subtract(apint that) {
         apint firstNum = this;
         apint secondNum = that;
