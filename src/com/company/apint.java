@@ -78,14 +78,15 @@ class apint {
 
 
     void trimZero() {
+        boolean noMoreLeadingZeros = false;
         if (this.num.charAt(0) == '0') {
             String newNum = "";
-            for (int i = 0; i < this.num.length(); i++) {
-                if (this.num.charAt(i) == '0') {
+            for (int i = 1; i < this.num.length(); i++) {
+                if (this.num.charAt(i) == '0' && !noMoreLeadingZeros) {
                     continue;
-                } else {
-                    newNum += this.num.charAt(i);
                 }
+                newNum += this.num.charAt(i);
+                noMoreLeadingZeros = true;
             }
             this.num = newNum;
         }
@@ -166,12 +167,12 @@ class apint {
         apint firstNum = this;
         apint secondNum = that;
         char sgn = '+';
-        if (firstNum.compareTo(secondNum)== -1) {
+        if (firstNum.compareTo(secondNum) == -1) {
             sgn = '-';
             firstNum = that;
             secondNum = this;
         }
-        if (firstNum.compareTo(secondNum)==0){
+        if (firstNum.compareTo(secondNum) == 0) {
             return new apint(0);
         }
 
@@ -190,6 +191,7 @@ class apint {
             placeHoldNumOne.apNum = firstNum.apNum;
             placeHoldNumTwo.apNum = secondNum.apNum;
             apint returnVal = placeHoldNumOne.add(placeHoldNumTwo);
+            returnVal.sign = sgn;
             return returnVal;
         }
 
@@ -208,9 +210,9 @@ class apint {
             int place = firstNum.apNum.get(i);
             int val = place - subval - carryout;
 
-            if (place < subval) {
+            if (place < subval || val < 0) {
+                val = (place + 10) - subval - carryout;
                 carryout = 1;
-                val = (place + 10) - subval;
             } else {
                 carryout = 0;
             }
@@ -227,7 +229,7 @@ class apint {
             idx++;
         }
 
-        apint returnVal = new apint(sgn,s);
+        apint returnVal = new apint(sgn, s);
         returnVal.trimZero();
 
         return new apint(returnVal.sign, returnVal.num);
@@ -310,7 +312,7 @@ class apint {
         apint numerator = this;
         apint divisor = that;
         char sign;
-        if (numerator.sign == divisor.sign){
+        if (numerator.sign == divisor.sign) {
             sign = '+';
 
         } else {
@@ -333,32 +335,31 @@ class apint {
             int digit = numerator.apNum.get(i);
             tmp1.apNum.add(digit);
             tmp1.num += digit;
-            if (tmp1.compareTo(divisor)>=0){
+            if (tmp1.compareTo(divisor) >= 0) {
                 int counter = 0;
-                while (true){
-                    tmp2 = new apint(tmp1.sign,tmp1.num);
+                while (true) {
+                    tmp2 = new apint(tmp1.sign, tmp1.num);
                     tmp1 = tmp1.subtract(divisor);
-                    if (tmp1.compareTo(zero) == -1){
+                    if (tmp1.compareTo(zero) == -1) {
                         break;
                     }
                     counter++;
                 }
 
-                if (tmp2.compareTo(zero) == 0){
+                if (tmp2.compareTo(zero) == 0) {
                     placeholderList.add(counter);
                     s += counter;
-                    for (int j = i+1; j < numerator.apNum.size(); j ++){
+                    for (int j = i + 1; j < numerator.apNum.size(); j++) {
                         placeholderList.add(0);
                         s += 0;
                     }
                     break;
                 }
-                tmp1 = new apint(tmp2.sign,tmp2.num);
+                tmp1 = new apint(tmp2.sign, tmp2.num);
                 placeholderList.add(counter);
                 s += counter;
             }
         }
-
 
 
         res.apNum = placeholderList;

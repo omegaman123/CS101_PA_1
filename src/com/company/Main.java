@@ -56,7 +56,7 @@ public class Main {
         System.out.println();
         System.out.printf("%s compared to %s = %s",cd.num,zro.num,cd.compareTo(zro));
         System.out.println();
-        System.out.printf("%s compared to %s = %s",aba.num,zro.num,aba.compareTo(zro));
+        System.out.printf("-%s compared to %s = %s",aba.num,zro.num,aba.compareTo(zro));
         System.out.println();
         System.out.printf("%s compared to %s = %s",zro.num,zro.num,zro.compareTo(zro));
         System.out.println();
@@ -176,10 +176,45 @@ public class Main {
         apint ss1 = new apint(100);
         apint ss2 = new apint(25);
         res = ss1.subtract(ss2);
+        System.out.printf("%s - %s = %s\n", ss1, ss2, res);
+        System.out.println();
+
+        apint ss3 = new apint(100);
+        apint ss4 = new apint(20);
+        res = ss3.subtract(ss4);
+        System.out.printf("%s - %s = %s\n", ss3, ss4, res);
+        System.out.println();
 
 
+        apint sf1 = new apint(1000);
+        res = sf1.subtract(ss4);
+        System.out.printf("%s - %s = %s\n", sf1, ss4, res);
+        System.out.println();
 
+        ss1 = new apint(10000);
+        ss2 = new apint(21);
+        res = ss2.subtract(ss1);
+        System.out.printf("%s - %s = %s\n", ss2, ss1, res);
+        System.out.println();
 
+        res = ss1.divide(ss2);
+        System.out.printf("%s / %s = %s\n", ss1, ss2, res);
+        System.out.println();
+
+        ss2 = new apint(-25);
+        res = ss2.subtract(ss1);
+        System.out.printf("%s - %s = %s\n", ss2, ss1, res);
+        System.out.println();
+
+        ss2 = new apint(-25);
+        res = ss1.subtract(ss2);
+        System.out.printf("%s - %s = %s\n", ss1, ss2, res);
+        System.out.println();
+
+        ss1 = new apint(25);
+        ss2 = new apint(-99);
+        res = ss1.subtract(ss2);
+        System.out.printf("%s - %s = %s\n", ss1, ss2, res);
 
 
 
