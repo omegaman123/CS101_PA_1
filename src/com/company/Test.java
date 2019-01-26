@@ -1,10 +1,10 @@
 package com.company;
 
-import java.math.BigInteger;
 
-public class Main {
+public class Test {
 
     public static void main(String[] args) {
+
 
 
         apint a = new apint('+',"10000");
@@ -47,6 +47,25 @@ public class Main {
         aprat fr = new aprat(123,12);
         aprat rf = new aprat(140,12);
 
+        b.print();
+        c.print();
+        d.print();
+        e.print();
+        f.print();
+
+        System.out.println();
+
+        apint arg1 = new apint(20020);
+        apint arg2 = new apint(2);
+        apint result = arg1.divide(arg2);
+        System.out.printf("%s / %s = %s; r : %s\n", arg1, arg2, result,result.remainder);
+        System.out.println();
+
+        arg1 = new apint(20);
+        arg2 = new apint(2);
+        result = arg1.divide(arg2);
+        System.out.printf("%s / %s = %s; r : %s\n", arg1, arg2, result,result.remainder);
+        System.out.println();
 
         System.out.printf("%s compared to %s = %s",a.num,b.num,a.compareTo(b));
         System.out.println();
@@ -61,13 +80,6 @@ public class Main {
         System.out.printf("%s compared to %s = %s",zro.num,zro.num,zro.compareTo(zro));
         System.out.println();
         System.out.println();
-
-
-        b.print();
-        c.print();
-        d.print();
-        e.print();
-        f.print();
 
         System.out.println();
 
@@ -240,6 +252,138 @@ public class Main {
         System.out.printf("%s / %s = %s; r : %s\n", a, b, res,res.remainder);
         System.out.println();
 
+        a = new apint(21);
+        b = new apint(1);
+        res = a.divide(b);
+        System.out.printf("%s / %s = %s; r : %s\n", a, b, res,res.remainder);
+        System.out.println();
+
+        a = new apint(20);
+        b = new apint(2);
+        res = a.divide(b);
+        System.out.printf("%s / %s = %s; r : %s\n", a, b, res,res.remainder);
+        System.out.println();
+
+        a = new apint(21);
+        b = new apint(2);
+        res = a.divide(b);
+        System.out.printf("%s / %s = %s; r : %s\n", a, b, res,res.remainder);
+        System.out.println();
+
+        a = new apint(210);
+        b = new apint(2);
+        res = a.divide(b);
+        System.out.printf("%s / %s = %s; r : %s\n", a, b, res,res.remainder);
+        System.out.println();
+
+        a = new apint(2100);
+        b = new apint(2);
+        res = a.divide(b);
+        System.out.printf("%s / %s = %s; r : %s\n", a, b, res,res.remainder);
+        System.out.println();
+
+        a = new apint(22);
+        b = new apint(2);
+        res = a.divide(b);
+        System.out.printf("%s / %s = %s; r : %s\n", a, b, res,res.remainder);
+        System.out.println();
+
+        aa = new apint(23);
+        bb = new apint(2);
+        res = aa.divide(bb);
+        System.out.printf("%s / %s = %s; r : %s\n", aa, bb, res,res.remainder);
+        System.out.println();
+
+        a = new apint(24);
+        b = new apint(2);
+        res = a.divide(b);
+        System.out.printf("%s / %s = %s; r : %s\n", a, b, res,res.remainder);
+        System.out.println();
+
+        a = new apint(25);
+        b = new apint(2);
+        res = a.divide(b);
+        System.out.printf("%s / %s = %s; r : %s\n", a, b, res,res.remainder);
+        System.out.println();
+
+        a = new apint(26);
+        b = new apint(2);
+        res = a.divide(b);
+        System.out.printf("%s / %s = %s; r : %s\n", a, b, res,res.remainder);
+        System.out.println();
+
+        a = new apint(30);
+        b = new apint(2);
+        res = a.divide(b);
+        System.out.printf("%s / %s = %s; r : %s\n", a, b, res,res.remainder);
+        System.out.println();
+
+        a = new apint(31);
+        b = new apint(2);
+        res = a.divide(b);
+        System.out.printf("%s / %s = %s; r : %s\n", a, b, res,res.remainder);
+        System.out.println();
+
+        a = new apint(31);
+        b = new apint(3);
+        res = a.divide(b);
+        System.out.printf("%s / %s = %s; r : %s\n", a, b, res,res.remainder);
+        System.out.println();
+
+        a = new apint(34);
+        b = new apint(3);
+        res = a.divide(b);
+        System.out.printf("%s / %s = %s; r : %s\n", a, b, res,res.remainder);
+        System.out.println();
+
+        arg1 = new apint(24);
+        arg2 = new apint(21);
+        result = arg1.divide(arg2);
+        System.out.printf("%s / %s = %s; r : %s\n", arg1, arg2, result,result.remainder);
+        System.out.println();
+
+        arg1 = new apint(24);
+        arg2 = new apint(2);
+        result = arg1.divide(arg2);
+        System.out.printf("%s / %s = %s; r : %s\n", arg1, arg2, result,result.remainder);
+        System.out.println();
+
+        arg1 = new apint(240);
+        arg2 = new apint(2);
+        result = arg1.divide(arg2);
+        System.out.printf("%s / %s = %s; r : %s\n", arg1, arg2, result,result.remainder);
+        System.out.println();
+
+        arg1 = new apint(241);
+        arg2 = new apint(2);
+        result = arg1.divide(arg2);
+        System.out.printf("%s / %s = %s; r : %s\n", arg1, arg2, result,result.remainder);
+        System.out.println();
+
+        arg1 = new apint(2020);
+        arg2 = new apint(2);
+        result = arg1.divide(arg2);
+        System.out.printf("%s / %s = %s; r : %s\n", arg1, arg2, result,result.remainder);
+        System.out.println();
+
+        arg1 = new apint(20020);
+        arg2 = new apint(2);
+        result = arg1.divide(arg2);
+        System.out.printf("%s / %s = %s; r : %s\n", arg1, arg2, result,result.remainder);
+        System.out.println();
+
+        arg1 = new apint(24);
+        arg2 = new apint(12);
+        result = arg1.divide(arg2);
+        System.out.printf("%s / %s = %s; r : %s\n", arg1, arg2, result,result.remainder);
+        System.out.println();
+
+        aprat h = new aprat(3,7);
+        aprat g = new aprat(5,3);
+        res1 = h.add(g);
+        System.out.printf("(%s / %s) + (%s / %s) = %s/%s\n", h.numerator, h.denominator,g.numerator,g.denominator, res1.numerator,res1.denominator);
+        System.out.println();
+
         res = apint.GreatestCommonDivisor(a,b);
         System.out.printf("GCD of %s and %s = %s",a,b,res);
         System.out.println();
@@ -267,25 +411,6 @@ public class Main {
         res = apint.GreatestCommonDivisor(a,b);
         System.out.printf("GCD of %s and %s = %s",a,b,res);
         System.out.println();
-
-        a = new apint(21);
-        b = new apint(1);
-        res = a.divide(b);
-        System.out.printf("%s / %s = %s; r : %s\n", a, b, res,res.remainder);
-        System.out.println();
-
-        a = new apint(21);
-        b = new apint(2);
-        res = a.divide(b);
-        System.out.printf("%s / %s = %s; r : %s\n", a, b, res,res.remainder);
-        System.out.println();
-
-        aprat h = new aprat(3,7);
-        aprat g = new aprat(5,3);
-        res1 = h.add(g);
-        System.out.printf("(%s / %s) + (%s / %s) = %s/%s\n", h.numerator, h.denominator,g.numerator,g.denominator, res1.numerator,res1.denominator);
-
-
 
     }
 }

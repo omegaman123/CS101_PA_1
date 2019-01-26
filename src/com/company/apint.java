@@ -15,8 +15,7 @@ class apint {
         this.sign = '+';
         this.num = "";
         this.remainder = null;
-
-
+        this.apNum = new ArrayList<>();
     }
 
     apint(char sign, String digits) {
@@ -28,7 +27,6 @@ class apint {
             char c = digits.charAt(i);
             int a = Character.getNumericValue(c);
             this.apNum.add(a);
-
         }
     }
 
@@ -91,14 +89,17 @@ class apint {
         boolean noMoreLeadingZeros = false;
         if (this.num.charAt(0) == '0') {
             String newNum = "";
+            ArrayList<Integer> newApNum = new ArrayList<>();
             for (int i = 1; i < this.num.length(); i++) {
                 if (this.num.charAt(i) == '0' && !noMoreLeadingZeros) {
                     continue;
                 }
                 newNum += this.num.charAt(i);
+                newApNum.add(this.apNum.get(i));
                 noMoreLeadingZeros = true;
             }
             this.num = newNum;
+            this.apNum = newApNum;
         }
     }
 
@@ -331,6 +332,7 @@ class apint {
 
         }
 
+        // System.out.printf("numerator: %s, divisor: %s\n", numerator, divisor);
         if (divisor.compareTo(new apint(1)) == 0){
             apint returnVal = new apint(numerator.sign,numerator.num);
             returnVal.remainder = new apint(0);
@@ -346,13 +348,12 @@ class apint {
         if (divisor.apNum.size() == 0) {
             throw new IllegalArgumentException("Divisor is zero");
         }
-        ArrayList<Integer> placeholderList = new ArrayList<>();
         apint res = new apint();
+        res.sign = sign;
+
         apint tmp1 = new apint();
-        tmp1.apNum = new ArrayList<>();
         apint tmp2 = new apint();
         apint zero = new apint(0);
-        String s = "";
 
         for (int i = 0; i < numerator.apNum.size(); i++) {
             int digit = numerator.apNum.get(i);
@@ -369,29 +370,41 @@ class apint {
                     counter++;
                 }
 
-                if (tmp2.compareTo(zero) == 0) {
-                    placeholderList.add(counter);
-                    s += counter;
-                    for (int j = i + 1; j < numerator.apNum.size(); j++) {
-                        placeholderList.add(0);
-                        s += 0;
-                    }
-                    break;
-                }
                 tmp1 = new apint(tmp2.sign, tmp2.num);
-                placeholderList.add(counter);
-                s += counter;
+                res.apNum.add(counter);
+                res.num += counter;
+
+                if (tmp2.compareTo(zero) == 0 && i != numerator.apNum.size() - 1) {
+                    apint numerator1 = new apint();
+                    for (int j = i + 1; j < numerator.apNum.size(); j++) {
+                        res.apNum.add(0);
+                        res.num += 0;
+                        int d = numerator.apNum.get(j);
+                        numerator1.apNum.add(d);
+                        numerator1.num += d;
+                    }
+                    if (numerator1.compareTo(zero) != 0) {
+                        numerator1.trimZero();
+                    }
+                    // System.out.printf("res: %s, numerator1 %s\n", res, numerator1);
+                    apint res1 = numerator1.divide(divisor);
+                    // System.out.printf("res: %s, res1: %s\n", res, res1);
+                    res1.sign = res.sign;
+
+                    res = res.add(res1);
+                    res.remainder = res1.remainder;
+                    // System.out.printf("res: %s, res1: %s\n", res, res1);
+                    return res;
+                }
             }
         }
 
         res.remainder = tmp2;
-        res.apNum = placeholderList;
-        res.num = s;
-        res.sign = sign;
         return res;
     }
 
 
+    //Public function to find the greatest common divisor of two apints, implementing Euclids algorithm
     static apint GreatestCommonDivisor(apint a, apint b){
         if (b.compareTo(Zero) == 0 ){
             return a;
@@ -407,6 +420,7 @@ class apint {
         return ab.divide(abGCD);
     }
 
+    //Changing the apint String printout to include the sign
     public String toString() {
         if (this.sign == '-') {
             return '-' + this.num;
@@ -415,6 +429,8 @@ class apint {
         }
     }
 
+    //compares one apint to another, similar to strings, returning a 1 if the caller apint is greater,
+    //0 if the caller equals the other apint, or -1 if it is less than the other
     int compareTo(apint that) {
         if (this.sign == '-' && that.sign == '+') {
             return -1;
