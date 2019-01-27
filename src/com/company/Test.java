@@ -87,6 +87,11 @@ public class Test {
         System.out.printf("%s + %s = %s\n", a, b, res);
         System.out.println();
 
+        a = new apint('+', "121932631112635269");
+        res = a.divide(c);
+        System.out.printf("%s / %s = %s\n", a, c, res);
+        System.out.println();
+
         res = aa.add(bb);
         System.out.printf("%s + %s = %s\n", aa, bb, res);
 
