@@ -409,6 +409,7 @@ class apint {
         if (b.compareTo(Zero) == 0 ){
             return a;
         }
+        //System.out.printf("a: %s ; b: %s\n",a.num,b.num);
         return GreatestCommonDivisor(b, a.divide(b).remainder);
 
     }

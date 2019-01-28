@@ -53,7 +53,14 @@ public class aprat {
         returnVal.numerator = newNumerator;
         returnVal.denominator = newDenominator;
         returnVal.sign = newNumerator.sign;
+
+        char sgn1 = returnVal.numerator.sign;
+        char sgn2 = returnVal.denominator.sign;
+        returnVal.numerator.sign = '+';
+        returnVal.denominator.sign = '+';
         returnVal.simplify();
+        returnVal.denominator.sign = sgn2;
+        returnVal.numerator.sign = sgn1;
         return returnVal;
     }
 
@@ -79,7 +86,14 @@ public class aprat {
         returnVal.numerator = newNumerator;
         returnVal.denominator = newDenominator;
         returnVal.sign = newNumerator.sign;
+
+        char sgn1 = returnVal.numerator.sign;
+        char sgn2 = returnVal.denominator.sign;
+        returnVal.numerator.sign = '+';
+        returnVal.denominator.sign = '+';
         returnVal.simplify();
+        returnVal.denominator.sign = sgn2;
+        returnVal.numerator.sign = sgn1;
         return returnVal;
 
     }
@@ -103,7 +117,14 @@ public class aprat {
         } else {
             returnVal.sign = '-';
         }
+
+        char sgn1 = returnVal.numerator.sign;
+        char sgn2 = returnVal.denominator.sign;
+        returnVal.numerator.sign = '+';
+        returnVal.denominator.sign = '+';
         returnVal.simplify();
+        returnVal.denominator.sign = sgn2;
+        returnVal.numerator.sign = sgn1;
         return returnVal;
     }
 
@@ -122,7 +143,13 @@ public class aprat {
         } else {
             returnVal.sign = '-';
         }
+        char sgn1 = returnVal.numerator.sign;
+        char sgn2 = returnVal.denominator.sign;
+        returnVal.numerator.sign = '+';
+        returnVal.denominator.sign = '+';
         returnVal.simplify();
+        returnVal.denominator.sign = sgn2;
+        returnVal.numerator.sign = sgn1;
         return returnVal;
     }
 
@@ -134,5 +161,15 @@ public class aprat {
         this.denominator = this.denominator.divide(gcd);
     }
 
+
+
+
+    public String toString() {
+        return this.numerator + "/" + this.denominator;
+    }
+
+    void print(){
+        System.out.println(this);
+    }
 }
 
