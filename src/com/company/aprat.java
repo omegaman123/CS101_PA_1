@@ -30,29 +30,29 @@ public class aprat {
         }
     }
 
-    aprat (String s){
+    aprat(String s) {
 
 
     }
 
-    aprat (double d){
+    aprat(double d) {
         char sgn;
         String s = String.valueOf(d);
         int decIdx = s.indexOf(".");
-        String deciString = s.substring(decIdx+1);
-        if (s.charAt(0)=='-'){
+        String deciString = s.substring(decIdx + 1);
+        if (s.charAt(0) == '-') {
             sgn = '-';
             s = s.substring(1);
         } else {
             sgn = '+';
         }
-        s = s.substring(0,decIdx);
+        s = s.substring(0, decIdx);
 
         int places = deciString.length();
         s += deciString;
-        apint topPart = new apint('+',s);
+        apint topPart = new apint('+', s);
         int mag = 1;
-        for (int i = 0; i < places; i++){
+        for (int i = 0; i < places; i++) {
             mag *= 10;
         }
         apint placeVal = new apint(mag);
@@ -195,13 +195,11 @@ public class aprat {
     }
 
 
-
-
     public String toString() {
         return this.numerator + "/" + this.denominator;
     }
 
-    void print(){
+    void print() {
         System.out.println(this);
     }
 }

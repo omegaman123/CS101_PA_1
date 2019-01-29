@@ -174,7 +174,6 @@ class apint {
     }
 
 
-
     apint subtract(apint that) {
         apint firstNum = this;
         apint secondNum = that;
@@ -321,8 +320,8 @@ class apint {
     }
 
     apint divide(apint that) throws IllegalArgumentException {
-        apint numerator = this;
-        apint divisor = that;
+        apint numerator = new apint(this.sign, this.num);
+        apint divisor = new apint(that.sign, that.num);
         char sign;
         if (numerator.sign == divisor.sign) {
             sign = '+';
@@ -331,15 +330,16 @@ class apint {
             sign = '-';
 
         }
+        numerator.sign = '+';
+        divisor.sign = '+';
 
-        // System.out.printf("numerator: %s, divisor: %s\n", numerator, divisor);
-        if (divisor.compareTo(new apint(1)) == 0){
-            apint returnVal = new apint(numerator.sign,numerator.num);
+        if (divisor.compareTo(new apint(1)) == 0) {
+            apint returnVal = new apint(numerator.sign, numerator.num);
             returnVal.remainder = new apint(0);
             return returnVal;
         }
 
-        if (numerator.compareTo(divisor) == -1){
+        if (numerator.compareTo(divisor) == -1) {
             apint returnVal = new apint(0);
             returnVal.remainder = numerator;
             return returnVal;
@@ -386,27 +386,26 @@ class apint {
                     if (numerator1.compareTo(zero) != 0) {
                         numerator1.trimZero();
                     }
-                    // System.out.printf("res: %s, numerator1 %s\n", res, numerator1);
                     apint res1 = numerator1.divide(divisor);
-                    // System.out.printf("res: %s, res1: %s\n", res, res1);
                     res1.sign = res.sign;
 
                     res = res.add(res1);
                     res.remainder = res1.remainder;
-                    // System.out.printf("res: %s, res1: %s\n", res, res1);
+
                     return res;
                 }
             }
         }
 
         res.remainder = tmp2;
+
         return res;
     }
 
 
     //Public function to find the greatest common divisor of two apints, implementing Euclids algorithm
-    static apint GreatestCommonDivisor(apint a, apint b){
-        if (b.compareTo(Zero) == 0 ){
+    static apint GreatestCommonDivisor(apint a, apint b) {
+        if (b.compareTo(Zero) == 0) {
             return a;
         }
         //System.out.printf("a: %s ; b: %s\n",a.num,b.num);
@@ -414,9 +413,9 @@ class apint {
 
     }
 
-    static apint LeastCommonMultiple(apint a, apint b){
+    static apint LeastCommonMultiple(apint a, apint b) {
         apint ab = a.multiply(b);
-        apint abGCD = GreatestCommonDivisor(a,b);
+        apint abGCD = GreatestCommonDivisor(a, b);
 
         return ab.divide(abGCD);
     }
