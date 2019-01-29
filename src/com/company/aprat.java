@@ -30,6 +30,39 @@ public class aprat {
         }
     }
 
+    aprat (String s){
+
+
+    }
+
+    aprat (double d){
+        char sgn;
+        String s = String.valueOf(d);
+        int decIdx = s.indexOf(".");
+        String deciString = s.substring(decIdx+1);
+        if (s.charAt(0)=='-'){
+            sgn = '-';
+            s = s.substring(1);
+        } else {
+            sgn = '+';
+        }
+        s = s.substring(0,decIdx);
+
+        int places = deciString.length();
+        s += deciString;
+        apint topPart = new apint('+',s);
+        int mag = 1;
+        for (int i = 0; i < places; i++){
+            mag *= 10;
+        }
+        apint placeVal = new apint(mag);
+        this.numerator = topPart;
+        this.denominator = placeVal;
+        this.simplify();
+        this.numerator.sign = sgn;
+
+    }
+
     //Subtract two aprats by changing their bases to be equal, and calling apint add on the top two numbers
     //Simplify the result.
     aprat add(aprat that) {

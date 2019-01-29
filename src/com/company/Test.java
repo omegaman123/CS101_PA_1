@@ -5,6 +5,9 @@ public class Test {
 
     public static void main(String[] args) {
 
+        aprat ggg = new aprat(123.3);
+        System.out.println(ggg);
+
         apint a = new apint('+',"10000");
         apint b = new apint('+',"200");
 
