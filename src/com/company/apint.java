@@ -247,17 +247,21 @@ class apint {
     }
 
 
+    //multiply caller apint by the apint passed in
     apint multiply(apint that) {
 
         apint firstnum = this;
         apint secondnum = that;
         char sign;
+
+        // if the first num is less than the second, swap them for convenience
         if (firstnum.apNum.size() < secondnum.apNum.size()) {
             apint ph = firstnum;
             firstnum = secondnum;
             secondnum = ph;
         }
 
+        //if the signs are the same, the result is postive. Negative otherwise
         if (firstnum.sign == secondnum.sign) {
             sign = '+';
         } else {
@@ -265,11 +269,15 @@ class apint {
         }
 
 
+        //Create an array list of array lists to hold the multiplication result from each digit
         ArrayList<ArrayList> placeHolderList = new ArrayList<>();
         int place = 0;
+        // For each digit of the smaller second number, multiply it by every digit of the first number.
+        // Store result in a new arraylist
         for (int i = secondnum.apNum.size() - 1; i >= 0; i--) {
             ArrayList<Integer> currentPlaceInReverse = new ArrayList<>();
             int carryout = 0;
+            //add a 0 to the list for each place after the first one
             for (int p = 0; p < place; p++) {
                 currentPlaceInReverse.add(0);
             }
@@ -284,21 +292,24 @@ class apint {
             }
             ArrayList<Integer> currentPlace = new ArrayList<>();
 
+            //Flip the list that was created in the loop as it is in reverse
             for (int l = currentPlaceInReverse.size() - 1; l >= 0; l--) {
                 currentPlace.add(currentPlaceInReverse.get(l));
 
             }
+            //add current place list to main one
             placeHolderList.add(currentPlace);
             place++;
         }
         ArrayList<ArrayList> separatedList = new ArrayList<>();
 
+        //Flip the list of place values as it is in reverse.
         for (int i = placeHolderList.size() - 1; i >= 0; i--) {
             separatedList.add(placeHolderList.get(i));
         }
-
         ArrayList<String> stringList = new ArrayList<>();
 
+        //Create a stringlist for every places product.
         for (int i = 0; i < separatedList.size(); i++) {
             String num = "";
             for (int j = 0; j < separatedList.get(i).size(); j++) {
@@ -308,21 +319,25 @@ class apint {
         }
         apint summedProduct = new apint('+', "0");
 
+        //Turn every string from the list into an apint and add all of the place products together
         for (int i = 0; i < stringList.size(); i++) {
             String s = stringList.get(i);
             apint temp = new apint('+', s);
             summedProduct = summedProduct.add(temp);
         }
+        //trim any leading zeroes and return the result.
         summedProduct.trimZero();
         summedProduct.sign = sign;
         return summedProduct;
 
     }
 
+    //divide the caller of the method with the passed in apint, throwing an illegal argument exception if 0 is passed
     apint divide(apint that) throws IllegalArgumentException {
         apint numerator = new apint(this.sign, this.num);
         apint divisor = new apint(that.sign, that.num);
         char sign;
+        //if the signs are the same, the final sign will be positive. Negative otherwise.
         if (numerator.sign == divisor.sign) {
             sign = '+';
 
@@ -333,18 +348,21 @@ class apint {
         numerator.sign = '+';
         divisor.sign = '+';
 
+        //if the divisor is one, return the numerator
         if (divisor.compareTo(new apint(1)) == 0) {
             apint returnVal = new apint(numerator.sign, numerator.num);
             returnVal.remainder = new apint(0);
             return returnVal;
         }
 
+        //if the divisor is greater than the numerator return the 0 and a remainder of the numerator
         if (numerator.compareTo(divisor) == -1) {
             apint returnVal = new apint(0);
             returnVal.remainder = numerator;
             return returnVal;
         }
 
+        //if divisor is 0, throw exception
         if (divisor.apNum.size() == 0) {
             throw new IllegalArgumentException("Divisor is zero");
         }
@@ -355,6 +373,9 @@ class apint {
         apint tmp2 = new apint();
         apint zero = new apint(0);
 
+        //Loop through numerator digits until you get i digits which are >= divisor
+        //Keep subtracting the divisor from this number until you get a result which is < 0
+        //Count how many times this happens, add counter to results most significant digit
         for (int i = 0; i < numerator.apNum.size(); i++) {
             int digit = numerator.apNum.get(i);
             tmp1.apNum.add(digit);
@@ -369,11 +390,15 @@ class apint {
                     }
                     counter++;
                 }
-
+                //Once you reach a result < 0, break, add the next digit of numerator to number that you subtracted from
+                //to get a result < 0
                 tmp1 = new apint(tmp2.sign, tmp2.num);
                 res.apNum.add(counter);
                 res.num += counter;
 
+                //If the divisor evenly divides the first n digits, count how many times, split number from those digts
+                //padding with 0s for remaining places.
+                //Recursively divide the remaining number split from the first n digits, add the results to each other.
                 if (tmp2.compareTo(zero) == 0 && i != numerator.apNum.size() - 1) {
                     apint numerator1 = new apint();
                     for (int j = i + 1; j < numerator.apNum.size(); j++) {
@@ -408,19 +433,11 @@ class apint {
         if (b.compareTo(Zero) == 0) {
             return a;
         }
-        //System.out.printf("a: %s ; b: %s\n",a.num,b.num);
         return GreatestCommonDivisor(b, a.divide(b).remainder);
 
     }
 
-    static apint LeastCommonMultiple(apint a, apint b) {
-        apint ab = a.multiply(b);
-        apint abGCD = GreatestCommonDivisor(a, b);
-
-        return ab.divide(abGCD);
-    }
-
-    //Changing the apint String printout to include the sign
+    //Changing the apint String printout to include the sign if negative
     public String toString() {
         if (this.sign == '-') {
             return '-' + this.num;
