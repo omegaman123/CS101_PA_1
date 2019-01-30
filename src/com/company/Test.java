@@ -42,12 +42,23 @@ public class Test {
         f.print(); //1235
         System.out.println();
 
-        System.out.println("Testing printout for double aprat contructer...");
+        System.out.println("Testing printout for  aprat constructors...");
         aprat ggg = new aprat(123.3);
         System.out.println(ggg); // 1233/10
 
         ggg = new aprat(44.44);
         System.out.println(ggg); // 1111/25
+
+        ggg = new aprat(ab,ba);
+        System.out.println(ggg); // 29/31
+
+        ggg = new aprat(cca,bba);
+        System.out.println(ggg); // -20/19
+
+        a = new apint(2);
+        b = new apint(4);
+        ggg = new aprat(a,b);
+        System.out.println(ggg); // 1/2
 
         System.out.println();
         System.out.println("Testing out comparison function for apints...");

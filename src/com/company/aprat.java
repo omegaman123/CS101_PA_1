@@ -14,6 +14,19 @@ public class aprat {
         this.sign = '+';
     }
 
+    aprat(apint numerator, apint denominator){
+
+        this.numerator = new apint('+',numerator.num);
+        this.denominator = new apint('+',denominator.num);
+        if (numerator.sign == denominator.sign){
+            this.sign = '+';
+        } else {
+            this.sign = '-';
+        }
+        this.simplify();
+
+    }
+
     // Constructer that takes in two integers to be a numerator and denominator.
     aprat(int numerator, int denominator) {
         this.numerator = new apint(numerator);
@@ -194,12 +207,19 @@ public class aprat {
 
     // aprats are printed in form : n/d
     public String toString() {
+        if (this.sign == '-'){
+            return "-" + this.numerator + "/" + this.denominator;
+        }
         return this.numerator + "/" + this.denominator;
     }
 
     // Print out for aprat in the form of : numerator/denominator
     void print() {
-        System.out.println(this);
+        if (this.sign == '-') {
+            System.out.println("-" + this);
+        } else {
+            System.out.println(this);
+        }
     }
 }
 
