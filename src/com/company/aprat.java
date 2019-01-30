@@ -14,6 +14,7 @@ public class aprat {
         this.sign = '+';
     }
 
+    // Constructer that takes in two integers to be a numerator and denominator.
     aprat(int numerator, int denominator) {
         this.numerator = new apint(numerator);
         this.denominator = new apint(denominator);
@@ -30,11 +31,9 @@ public class aprat {
         }
     }
 
-    aprat(String s) {
-
-
-    }
-
+    // Constructor that takes in a double and converts in to a rational number by first, counting how many decimal places
+    // it has. Then, multiplying the original by 10 times the number of decimal places to get rid of the decimal
+    // and finally, dividing by 10 times the number of decimal places
     aprat(double d) {
         char sgn;
         String s = String.valueOf(d);
@@ -76,7 +75,6 @@ public class aprat {
             return returnVal;
 
         }
-//      apint lcm = apint.LeastCommonMultiple(this.denominator,that.denominator);
         apint newDenominator = this.denominator.multiply(that.denominator);
         apint firstNumerator = this.numerator.multiply(that.denominator);
         apint secondNumerator = that.numerator.multiply(this.denominator);
@@ -194,11 +192,12 @@ public class aprat {
         this.denominator = this.denominator.divide(gcd);
     }
 
-
+    // aprats are printed in form : n/d
     public String toString() {
         return this.numerator + "/" + this.denominator;
     }
 
+    // Print out for aprat in the form of : numerator/denominator
     void print() {
         System.out.println(this);
     }

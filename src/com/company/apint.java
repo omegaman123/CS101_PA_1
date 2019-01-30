@@ -64,6 +64,7 @@ class apint {
 
     }
 
+    //print out a formatted apint string
     void print() {
         if (this.num.charAt(0) == '0') {
             String newNum = "";
@@ -85,6 +86,7 @@ class apint {
     }
 
 
+    //Trim the leading 0s of an apint
     void trimZero() {
         boolean noMoreLeadingZeros = false;
         if (this.num.charAt(0) == '0') {
@@ -103,11 +105,13 @@ class apint {
         }
     }
 
+    // Add the caller apint to the passed in apint.
     apint add(apint that) {
-
         apint firstNum = this;
         apint secondNum = that;
         char sign = '+';
+
+        //If one of the numbers is negative, subtract that number from the positive one instead.
         if ((this.sign == '+' && that.sign == '-') || (this.sign == '-' && that.sign == '+')) {
             firstNum = new apint();
             firstNum.apNum = this.apNum;
@@ -122,9 +126,11 @@ class apint {
             return firstNum.subtract(secondNum);
         }
 
+        //If both numbers are negative, the finale result will be negative
         if (this.sign == '-' && that.sign == '-') {
             sign = '-';
         }
+        //If the second number is larger than the first, flip them for convenience
         if (this.apNum.size() < that.apNum.size()) {
             secondNum = this;
             firstNum = that;
@@ -133,6 +139,9 @@ class apint {
         ArrayList<Integer> placeHolderList = new ArrayList<>();
         int carryout = 0;
         int counter = 0;
+
+        // Starting from the last digit of each number, add them together and keep track of carryout to add to next
+        // addition. Store the result.
         for (int i = firstNum.apNum.size() - 1; i >= 0; i--) {
             int addVal;
             if (counter > secondNum.apNum.size() - 1) {
@@ -156,6 +165,7 @@ class apint {
         }
         ArrayList<Integer> answer = new ArrayList<>();
 
+        //Flip the result list as it is in reverse and return the value as a new apint
         String s = "";
         int idx = 0;
         for (int i = placeHolderList.size() - 1; i >= 0; i--) {
@@ -173,20 +183,23 @@ class apint {
 
     }
 
-
+    //Subtract the passed in apint parameter from the caller apint
     apint subtract(apint that) {
         apint firstNum = this;
         apint secondNum = that;
         char sgn = '+';
+        //if the first number is less than the second, switch the numbers and negate the result for convenience
         if (firstNum.compareTo(secondNum) == -1) {
             sgn = '-';
             firstNum = that;
             secondNum = this;
         }
+        //If the numbers are the same, return 0
         if (firstNum.compareTo(secondNum) == 0) {
             return new apint(0);
         }
 
+        //if a negative number is subtracting a positive one, treat them as two negatives and add instead.
         if (firstNum.sign == '-' && secondNum.sign == '+') {
             apint placeHoldNumOne = new apint('-', firstNum.num);
             apint placeHoldNumTwo = new apint('-', secondNum.num);
@@ -196,6 +209,7 @@ class apint {
             return returnVal;
         }
 
+        //If a positive number is subtracting a negative, treat them as two positives and add instead.
         if (firstNum.sign == '+' && secondNum.sign == '-') {
             apint placeHoldNumOne = new apint('+', firstNum.num);
             apint placeHoldNumTwo = new apint('+', secondNum.num);
@@ -211,6 +225,10 @@ class apint {
 
         int carryout = 0;
         int counter = 0;
+        // for each digit of both numbers, starting at the end, subtract the second numbers ith digit from the
+        //first numbers ith digit. If the result is less than 0, add ten to the first digit and store a carryout of
+        // 1 to be subtracted from the next digit.
+        //Once the digits to subtract run out, subtract 0 until the end of the number instead
         for (int i = firstNum.apNum.size() - 1; i >= 0; i--) {
             int subval;
             if (counter > secondNum.apNum.size() - 1) {
@@ -230,7 +248,7 @@ class apint {
             placeHolderList.add(val);
             counter++;
         }
-
+        //Flip the result list as it is in reverse order and return that result.
         ArrayList<Integer> answer = new ArrayList<>();
         String s = "";
         int idx = 0;
