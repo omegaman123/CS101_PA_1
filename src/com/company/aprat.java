@@ -207,18 +207,25 @@ public class aprat {
 
     // aprats are printed in form : n/d
     public String toString() {
+        if (this.err !=  null){
+            return this.err;
+        }
         if (this.sign == '-'){
-            return "-" + this.numerator + "/" + this.denominator;
+            return "-" + this.numerator.num + "/" + this.denominator.num;
         }
         return this.numerator + "/" + this.denominator;
     }
 
     // Print out for aprat in the form of : numerator/denominator
     void print() {
-        if (this.sign == '-') {
-            System.out.println("-" + this);
+        if (this.err != null) {
+            System.out.println(this.err);
         } else {
-            System.out.println(this);
+            if (this.sign == '-') {
+                System.out.println(this);
+            } else {
+                System.out.println(this);
+            }
         }
     }
 }
