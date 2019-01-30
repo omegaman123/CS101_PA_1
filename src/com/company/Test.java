@@ -40,6 +40,12 @@ public class Test {
         d.print(); //987654321
         e.print(); //-100000000
         f.print(); //1235
+        f = new apint("1234");
+        f.print();
+        f = new apint("-1234");
+        f.print();
+        f = new apint("+1234");
+        f.print();
         System.out.println();
 
         System.out.println("Testing printout for  aprat constructors...");

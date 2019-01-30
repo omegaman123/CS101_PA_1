@@ -18,6 +18,20 @@ class apint {
         this.apNum = new ArrayList<>();
     }
 
+    apint(String s){
+        char sgn = '+';
+        if (s.charAt(0) == '-'){
+            sgn = '-';
+            s = s.substring(1);
+        } else if (s.charAt(0)== '+'){
+            s = s.substring(1);
+        }
+        apint tmp = new apint(sgn,s);
+        this.apNum = tmp.apNum;
+        this.num = tmp.num;
+        this.sign = sgn;
+    }
+
     apint(char sign, String digits) {
         this.sign = sign;
         this.num = digits;
