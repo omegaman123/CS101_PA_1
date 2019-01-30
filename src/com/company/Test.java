@@ -41,11 +41,11 @@ public class Test {
         e.print(); //-100000000
         f.print(); //1235
         f = new apint("1234");
-        f.print();
+        f.print(); //1234
         f = new apint("-1234");
-        f.print();
+        f.print();  //-1234
         f = new apint("+1234");
-        f.print();
+        f.print();  //1234
         System.out.println();
 
         System.out.println("Testing printout for  aprat constructors...");
@@ -55,15 +55,15 @@ public class Test {
         ggg = new aprat(44.44);
         System.out.println(ggg); // 1111/25
 
-        ggg = new aprat(ab,ba);
+        ggg = new aprat(ab, ba);
         System.out.println(ggg); // 29/31
 
-        ggg = new aprat(cca,bba);
+        ggg = new aprat(cca, bba);
         System.out.println(ggg); // -20/19
 
         a = new apint(2);
         b = new apint(4);
-        ggg = new aprat(a,b);
+        ggg = new aprat(a, b);
         System.out.println(ggg); // 1/2
 
         System.out.println();

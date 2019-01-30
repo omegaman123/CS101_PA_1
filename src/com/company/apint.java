@@ -18,15 +18,15 @@ class apint {
         this.apNum = new ArrayList<>();
     }
 
-    apint(String s){
+    apint(String s) {
         char sgn = '+';
-        if (s.charAt(0) == '-'){
+        if (s.charAt(0) == '-') {
             sgn = '-';
             s = s.substring(1);
-        } else if (s.charAt(0)== '+'){
+        } else if (s.charAt(0) == '+') {
             s = s.substring(1);
         }
-        apint tmp = new apint(sgn,s);
+        apint tmp = new apint(sgn, s);
         this.apNum = tmp.apNum;
         this.num = tmp.num;
         this.sign = sgn;
@@ -301,7 +301,7 @@ class apint {
         }
 
 
-        //Create an array list of array lists to hold the multiplication result from each digit
+        // Create an array list of array lists to hold the multiplication result from each digit
         ArrayList<ArrayList> placeHolderList = new ArrayList<>();
         int place = 0;
         // For each digit of the smaller second number, multiply it by every digit of the first number.

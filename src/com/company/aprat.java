@@ -14,11 +14,14 @@ public class aprat {
         this.sign = '+';
     }
 
-    aprat(apint numerator, apint denominator){
+    aprat(apint numerator, apint denominator) throws IllegalArgumentException {
 
-        this.numerator = new apint('+',numerator.num);
-        this.denominator = new apint('+',denominator.num);
-        if (numerator.sign == denominator.sign){
+        this.numerator = new apint('+', numerator.num);
+        this.denominator = new apint('+', denominator.num);
+        if (denominator.compareTo(new apint(0)) == 0) {
+            throw new IllegalArgumentException("Denominator is 0");
+        }
+        if (numerator.sign == denominator.sign) {
             this.sign = '+';
         } else {
             this.sign = '-';
@@ -28,7 +31,7 @@ public class aprat {
     }
 
     // Constructer that takes in two integers to be a numerator and denominator.
-    aprat(int numerator, int denominator) {
+    aprat(int numerator, int denominator) throws IllegalArgumentException {
         this.numerator = new apint(numerator);
         this.denominator = new apint(denominator);
         if (numerator < 0 && denominator > 0) {
@@ -38,9 +41,8 @@ public class aprat {
         } else {
             this.sign = '+';
         }
-        if (numerator == 0 || denominator == 0) {
-            this.err = "Denominator or numerator given is 0";
-            return;
+        if (denominator == 0) {
+            throw new IllegalArgumentException("Denominator is 0");
         }
     }
 
@@ -207,10 +209,10 @@ public class aprat {
 
     // aprats are printed in form : n/d
     public String toString() {
-        if (this.err !=  null){
+        if (this.err != null) {
             return this.err;
         }
-        if (this.sign == '-'){
+        if (this.sign == '-') {
             return "-" + this.numerator.num + "/" + this.denominator.num;
         }
         return this.numerator + "/" + this.denominator;
