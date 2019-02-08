@@ -198,6 +198,7 @@ public class Test {
 
         System.out.println();
         System.out.println("Testing out divide and remainder calculations...");
+        result = arg1.divide(arg2);
         System.out.printf("%s / %s = %s; r : %s\n", arg1, arg2, result, result.remainder); // 20 / 2 = 10010; r : 0
         a = new apint(15);
         b = new apint(6);

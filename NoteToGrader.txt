@@ -1,0 +1,6 @@
+Note to Grader:
+
+My approach to implementing the apint and aprat ADTs was done using Arraylist. Each apint was constructed with a sign agnostic arraylist containing each digit, a sign character, and a string representation of the array list as well as a remainder that was initialized to null unless the apint was the result of a division and needed a remainder attached to it. Each aprat was constructed with a numerator and a denominator, both of which were apints. Each aprat also had a sign character and throwing an exception if the denominator is 0.
+
+When operating on apints or aprats, my general approach was to loop through individual digits, starting at the end or least significant digit and move backwards towards the most significant digit, storing the result of the operation in a placeholder list. The outcome of this method was that each placeholder list was in reverse order and needed to be reversed to have the digits in the right place. For aprats, there came the extra step of simplifying the results of the calculations which were often simply multiple apint calculations over each other. To simplify, the GCD is found by implementing Euclids algorithm and dividing the top and bottom by that number.
+
